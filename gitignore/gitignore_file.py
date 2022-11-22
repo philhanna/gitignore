@@ -80,7 +80,16 @@ class GitignoreFile:
                 defaults = json.load(fp)
         else:
             defaults = {
-                "py": ["*.swp", "*.pyc", "*.pyo", "__pycache__", ".idea/", "venv/"],
+                "py": ["*.swp",
+                       "*.pyc",
+                       "*.pyo",
+                       "__pycache__",
+                       ".idea/",
+                       "venv/",
+                       "build/",
+                       "dist/",
+                       "*.egg-info/",
+            ],
                 "ly": ["*.swp", "*.mid", "*.midi", "*.ogg"],
                 "java": ["*.swp", "build/", "doc/", "*.class", ".classpath", ".project"],
             }
