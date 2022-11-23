@@ -3,7 +3,8 @@ import argparse
 from gitignore import FILENAME, GitignoreFile
 
 parser = argparse.ArgumentParser(
-    description=f'Creates a basic {FILENAME} file in the current directory')
+    description=f'Creates a basic {FILENAME} file in the current directory',
+    prog="gitignore")
 parser.add_argument('-l', '--list',
                     help=f'Lists the current {FILENAME}',
                     action='store_true')

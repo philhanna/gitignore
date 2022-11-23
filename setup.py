@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='gitignore',
     version='1.0.0',
-    packages=['tests', 'gitignore'],
+    packages=['gitignore'],
     url='https://github.com/philhanna/gitignore',
     license='MIT License',
     author='Phil Hanna',
