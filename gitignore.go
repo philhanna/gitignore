@@ -1,7 +1,6 @@
 package gitignore
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -13,12 +12,6 @@ const FILENAME = ".gitignore"
 // Type definitions
 // ---------------------------------------------------------------------
 
-// Config keeps track of the editor and file types
-type Config struct {
-	Editor    string              `json:"editor"`
-	Filetypes map[string][]string `json:"filetypes"`
-}
-
 // Options holds the command line options
 type Options struct {
 	List     bool
@@ -28,6 +21,7 @@ type Options struct {
 	Filetype string
 }
 
+// Gitignore holds the application data
 type Gitignore struct {
 	opt    Options
 	config Config
@@ -38,10 +32,10 @@ type Gitignore struct {
 // ---------------------------------------------------------------------
 
 // NewGitignore creates a new Gitignore struct
-func NewGitignore(options Options, config Config) Gitignore {
+func NewGitignore(options Options) Gitignore {
 	p := new(Gitignore)
 	p.opt = options
-	p.config = config
+	p.config = NewConfig()
 	return *p
 }
 
@@ -64,8 +58,7 @@ func (self Gitignore) Run() error {
 	// replace option was specified.
 	if exists(FILENAME) {
 		if self.opt.Replace {
-			err := self.Create()
-			if err != nil {
+			if err:= self.Create(); err != nil {
 				return err
 			}
 		} else {
@@ -76,8 +69,7 @@ func (self Gitignore) Run() error {
 			}
 		}
 	} else {
-		err := self.Create()
-		if err != nil {
+		if err := self.Create(); err != nil {
 			return err
 		}
 	}
@@ -97,36 +89,36 @@ func (self Gitignore) Run() error {
 
 // Create creates the .gitignore file
 func (self Gitignore) Create() error {
-	if !self.opt.Quiet {
-		fmt.Printf("Creating new %s\n", FILENAME)
+
+	// Use the appropriate lines
+	var lines []string
+
+	filetype := self.opt.Filetype
+	switch {
+	case filetype != "":
+		
+		// If a file type was specified (e.g., "java", "py", "go"), see if it
+		// is one of the configured types
+		var ok bool
+		lines, ok = self.config.FileTypes[filetype]
+		if !ok {
+			return fmt.Errorf("%q is not a recognized file type\n", filetype)
+		}
+
+	default:
+		lines = GetDefaults()
 	}
 
-	// Create the file
+	// Write the file
+	if !self.opt.Quiet {
+		fmt.Printf("Creating %s\n", FILENAME)
+	}
 	fp, _ := os.Create(FILENAME)
 	defer fp.Close()
-
-	// See if a filetype was specified (e.g., "java", "py", etc.) If
-	// not, just use the defaults
-	filetype := self.opt.Filetype
-	if filetype == "" {
-		for _, line := range getDefaults() {
-			fmt.Fprintf(fp, line)
-		}
-		return nil
-	}
-
-	// If a filetype *was* specified, see if it is one of the configured
-	// types
-	lines, ok := self.config.Filetypes[filetype]
-	if !ok {
-		errmsg := fmt.Sprintf("%q is not a recognized file type\n", filetype)
-		return errors.New(errmsg)
-	}
-
-	// If it was a configured type, use the lines from the configuration
 	for _, line := range lines {
 		fmt.Fprintln(fp, line)
 	}
+
 	return nil
 }
 
@@ -152,17 +144,8 @@ func (self Gitignore) ListFile() {
 // Functions
 // ---------------------------------------------------------------------
 
-// exists returns true if the specified file exists
-func exists(filename string) bool {
-	_, err := os.Stat(filename)
-	if err != nil {
-		return false
-	}
-	return true
-}
-
-// getDefaults returns the default .gitignore data
-func getDefaults() []string {
+// GetDefaults returns the default .gitignore data
+func GetDefaults() []string {
 	defaults := []string{
 		"*.swp",
 	}

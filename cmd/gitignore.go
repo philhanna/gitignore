@@ -5,13 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"embed"
 	gi "github.com/philhanna/gitignore"
-	yaml "sigs.k8s.io/yaml"
 )
-
-//go:embed default_config.yaml
-var f embed.FS
 
 // Mainline
 func main() {
@@ -55,17 +50,9 @@ options:
 		opt.Filetype = flag.Arg(0)
 	}
 
-	configBytes, err := f.ReadFile("default_config.yaml")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "gitignore: Default configuration file not found\n")
-		return
-	}
-	config := gi.Config{}
-	yaml.Unmarshal(configBytes, &config)
-
 	// Run the application
-	app := gi.NewGitignore(*opt, config)
-	err = app.Run()
+	app := gi.NewGitignore(*opt)
+	err := app.Run()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "gitignore: %s\n", err.Error())
 	}
