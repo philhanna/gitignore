@@ -25,6 +25,21 @@ options:
   -e, --edit     Edit the file when done
 ```
 
+## Installation
+
+### Binary executables
+There are pre-built binary executables for Linux, Windows, and MacOS in
+the `bin` directory.  Copy the appropriate one for your operating system
+to a directory in your path, and rename it as desired.
+
+### From source
+If you have Go installed, you can install the application with this:
+```
+go install cmd/gitignore.go
+```
+
+
+
 ## Configuration
 
 The application usage a configurable `.yaml` file for file types

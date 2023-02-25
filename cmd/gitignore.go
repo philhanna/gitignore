@@ -15,7 +15,7 @@ func main() {
 Creates a basic .gitignore file in the current directory
 
 positional arguments:
-  filetype       Type of files (e.g., "go", "java", "py")
+  filetype       Type of files (e.g. go, java, py)
 
 options:
   -h, --help     Show this help message and exits
