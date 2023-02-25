@@ -8,8 +8,8 @@ import (
 	"sigs.k8s.io/yaml"
 )
 
-//go:embed default_config.yaml
-var f embed.FS
+//go:embed sample_config.yaml
+var embeddedFS embed.FS
 
 // ---------------------------------------------------------------------
 // Type definitions
@@ -52,7 +52,7 @@ func GetConfigData() []byte {
 	var data []byte
 
 	// See if the user has a local configuration file. If not, use the
-	// default one.
+	// sample one.
 	home, _ := os.UserHomeDir()
 	configFile := filepath.Join(home, ".gitignore.yaml")
 
@@ -60,7 +60,7 @@ func GetConfigData() []byte {
 	case exists(configFile):
 		data, _ = os.ReadFile(configFile)
 	default:
-		data, _ = f.ReadFile("default_config.yaml")
+		data, _ = embeddedFS.ReadFile("sample_config.yaml")
 	}
 
 	return data
