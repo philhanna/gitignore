@@ -58,7 +58,7 @@ func (self Gitignore) Run() error {
 	// replace option was specified.
 	if exists(FILENAME) {
 		if self.opt.Replace {
-			if err:= self.Create(); err != nil {
+			if err := self.Create(); err != nil {
 				return err
 			}
 		} else {
@@ -96,7 +96,7 @@ func (self Gitignore) Create() error {
 	filetype := self.opt.Filetype
 	switch {
 	case filetype != "":
-		
+
 		// If a file type was specified (e.g., "java", "py", "go"), see if it
 		// is one of the configured types
 		var ok bool
