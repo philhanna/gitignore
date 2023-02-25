@@ -1,0 +1,26 @@
+editor: vim
+filetypes:
+  java:
+  - "*.swp"
+  - build/
+  - doc/
+  - "*.class"
+  - .classpath
+  - .project
+  go:
+  - "*.swp"
+  py:
+  - "*.swp"
+  - "*.pyc"
+  - "*.pyo"
+  - __pycache__
+  - .idea/
+  - venv/
+  - build/
+  - dist/
+  - "*.egg-info/"
+  ly:
+  - "*.swp"
+  - "*.mid"
+  - "*.midi"
+  - "*.ogg"
