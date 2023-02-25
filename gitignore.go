@@ -17,7 +17,7 @@ type Options struct {
 	List     bool
 	Replace  bool
 	Edit     bool
-	Quiet    bool
+	Verbose  bool
 	Filetype string
 }
 
@@ -62,7 +62,7 @@ func (self Gitignore) Run() error {
 				return err
 			}
 		} else {
-			if !self.opt.Quiet {
+			if self.opt.Verbose {
 				fmt.Printf("Not replacing existing %s\n", FILENAME)
 				fmt.Printf("Use -r flag to replace\n")
 				fmt.Printf("Try -h for help\n")
@@ -75,7 +75,7 @@ func (self Gitignore) Run() error {
 	}
 
 	// List the contents of the file.
-	if !self.opt.Quiet && !self.opt.Edit {
+	if self.opt.Verbose && !self.opt.Edit {
 		self.ListFile()
 	}
 
@@ -110,7 +110,7 @@ func (self Gitignore) Create() error {
 	}
 
 	// Write the file
-	if !self.opt.Quiet {
+	if self.opt.Verbose {
 		fmt.Printf("Creating %s\n", FILENAME)
 	}
 	fp, _ := os.Create(FILENAME)

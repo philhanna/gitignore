@@ -18,10 +18,10 @@ positional arguments:
   filetype       Type of files (['java', 'go', 'py', 'ly', etc.])
 
 options:
-  -h, --help     show this help message and exit
+  -h, --help     Show this help message and exits
   -l, --list     Lists the current .gitignore
   -r, --replace  Replaces the current .gitignore, if it exists
-  -q, --quiet    Suppresses the printing of the .gitignore file
+  -v, --verbose  Provides more details
   -e, --edit     Edit the file when done
 `
 	flag.Usage = func() {
@@ -35,12 +35,12 @@ options:
 
 	flag.BoolVar(&opt.List, "list", false, "Lists the current .gitignore")
 	flag.BoolVar(&opt.Replace, "replace", false, "Replaces the current .gitignore, if it exists")
-	flag.BoolVar(&opt.Quiet, "quiet", false, "Suppresses the printing of the .gitignore file")
+	flag.BoolVar(&opt.Verbose, "verbose", false, "Provides more details")
 	flag.BoolVar(&opt.Edit, "edit", false, "Edit the file when done")
 
 	flag.BoolVar(&opt.List, "l", false, "Short form of --list")
 	flag.BoolVar(&opt.Replace, "r", false, "Short form of --replace")
-	flag.BoolVar(&opt.Quiet, "q", false, "Short form of --quiet")
+	flag.BoolVar(&opt.Verbose, "v", false, "Short form of --verbose")
 	flag.BoolVar(&opt.Edit, "e", false, "Short form of --edit")
 
 	flag.Parse()
