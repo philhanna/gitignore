@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
 
 	"embed"
@@ -58,12 +57,16 @@ options:
 
 	configBytes, err := f.ReadFile("default_config.yaml")
 	if err != nil {
-		log.Fatal("Default configuration file not found")
+		fmt.Fprintf(os.Stderr, "gitignore: Default configuration file not found\n")
+		return
 	}
 	config := gi.Config{}
 	yaml.Unmarshal(configBytes, &config)
 
-
 	// Run the application
-	gi.NewGitignore(*opt, config).Run()
+	app := gi.NewGitignore(*opt, config)
+	err = app.Run()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "gitignore: %s\n", err.Error())
+	}
 }

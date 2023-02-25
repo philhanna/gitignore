@@ -1,6 +1,7 @@
 package gitignore
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -49,21 +50,24 @@ func NewGitignore(options Options, config Config) Gitignore {
 // ---------------------------------------------------------------------
 
 // Run runs the application
-func (self Gitignore) Run() {
+func (self Gitignore) Run() error {
 
 	// List the file if requested.
 	if self.opt.List {
 		if exists(FILENAME) {
 			self.ListFile()
 		}
-		return
+		return nil
 	}
 
 	// Create the file if it does not exist, or if it exists and the
 	// replace option was specified.
 	if exists(FILENAME) {
 		if self.opt.Replace {
-			self.Create()
+			err := self.Create()
+			if err != nil {
+				return err
+			}
 		} else {
 			if !self.opt.Quiet {
 				fmt.Printf("Not replacing existing %s\n", FILENAME)
@@ -72,7 +76,10 @@ func (self Gitignore) Run() {
 			}
 		}
 	} else {
-		self.Create()
+		err := self.Create()
+		if err != nil {
+			return err
+		}
 	}
 
 	// List the contents of the file.
@@ -85,26 +92,42 @@ func (self Gitignore) Run() {
 		self.EditFile()
 	}
 
-	return
+	return nil
 }
 
 // Create creates the .gitignore file
-func (self Gitignore) Create() {
+func (self Gitignore) Create() error {
 	if !self.opt.Quiet {
 		fmt.Printf("Creating new %s\n", FILENAME)
 	}
-	
+
 	// Create the file
 	fp, _ := os.Create(FILENAME)
 	defer fp.Close()
+
+	// See if a filetype was specified (e.g., "java", "py", etc.) If
+	// not, just use the defaults
 	filetype := self.opt.Filetype
+	if filetype == "" {
+		for _, line := range getDefaults() {
+			fmt.Fprintf(fp, line)
+		}
+		return nil
+	}
+
+	// If a filetype *was* specified, see if it is one of the configured
+	// types
 	lines, ok := self.config.Filetypes[filetype]
 	if !ok {
-		lines = getDefaults()
+		errmsg := fmt.Sprintf("%q is not a recognized file type\n", filetype)
+		return errors.New(errmsg)
 	}
+
+	// If it was a configured type, use the lines from the configuration
 	for _, line := range lines {
 		fmt.Fprintln(fp, line)
 	}
+	return nil
 }
 
 // EditFile brings up the configured editor on the .gitignore file
