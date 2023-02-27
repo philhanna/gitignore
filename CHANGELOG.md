@@ -5,16 +5,26 @@ The format is based on [Keep a Changelog].
 	
 ## [Unreleased]
 
+## [v1.1.1] - 2023-02-27
+
+### Fixed
+- issue #5 - Invalid local user configuration .yaml is not being checked
+
 ## [v1.1.0] - 2023-02-24
+
+### Added
 - Added ability to use local configuration `.yaml` file
-- Replaced `--quiet` option with `--verbose`
 - Added this change log
+
+### Changed
+- Replaced `--quiet` option with `--verbose`
 
 ## [v1.0.0] - 2023-02-24
 - Preliminary Go version
 
 [Semantic Versioning]: http://semver.org
 [Keep a Changelog]: http://keepachangelog.com
-[Unreleased]: https://github.com/philhanna/gitignore/compare/v1.1.0..HEAD
+[Unreleased]: https://github.com/philhanna/gitignore/compare/v1.1.1..HEAD
+[v1.1.1]: https://github.com/philhanna/gitignore/compare/v1.1.0..v1.1.1
 [v1.1.0]: https://github.com/philhanna/gitignore/compare/v1.0.0..v1.1.0
 [v1.0.0]: https://github.com/philhanna/gitignore/compare/91591ad..v1.0.0
