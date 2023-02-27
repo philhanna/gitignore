@@ -29,7 +29,7 @@ type Config struct {
 func NewConfig() Config {
 	configData := GetConfigData()
 	config := new(Config)
-	yaml.Unmarshal(configData, config)
+	yaml.Unmarshal(configData, &config)
 	return *config
 }
 
