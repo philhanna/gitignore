@@ -2,6 +2,8 @@ package gitignore
 
 import (
 	"embed"
+	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -26,11 +28,21 @@ type Config struct {
 // ---------------------------------------------------------------------
 
 // NewConfig creates a new Config object
-func NewConfig() Config {
-	configData := GetConfigData()
+func NewConfig() (Config, error) {
+	configData, isLocal := GetConfigData()
 	config := new(Config)
-	yaml.Unmarshal(configData, &config)
-	return *config
+	err := yaml.Unmarshal(configData, &config)
+	if err != nil {
+		var errmsg string
+		switch isLocal {
+		case true:
+			errmsg = fmt.Sprintf("Invalid yaml in local .gitignore.yaml: %s", err)
+		case false:
+			errmsg = fmt.Sprintf("Invalid yaml in built-in sample_config.yaml: %s", err)
+		}
+		return Config{}, errors.New(errmsg)
+	}
+	return *config, nil
 }
 
 // ---------------------------------------------------------------------
@@ -47,8 +59,10 @@ func exists(filename string) bool {
 }
 
 // GetConfigData loads the configuration yaml data, either from the
-// user's ~/.gitignore.yaml file or the default configuration.
-func GetConfigData() []byte {
+// user's ~/.gitignore.yaml file or the default configuration. The
+// boolean return value is true if the configuration is local, false if
+// it came from the sample configuration.
+func GetConfigData() ([]byte, bool) {
 	var data []byte
 
 	// See if the user has a local configuration file. If not, use the
@@ -56,12 +70,15 @@ func GetConfigData() []byte {
 	home, _ := os.UserHomeDir()
 	configFile := filepath.Join(home, ".gitignore.yaml")
 
+	var isLocal bool
 	switch {
 	case exists(configFile):
+		isLocal = true
 		data, _ = os.ReadFile(configFile)
 	default:
+		isLocal = false
 		data, _ = embeddedFS.ReadFile("sample_config.yaml")
 	}
 
-	return data
+	return data, isLocal
 }

@@ -32,11 +32,15 @@ type Gitignore struct {
 // ---------------------------------------------------------------------
 
 // NewGitignore creates a new Gitignore struct
-func NewGitignore(options Options) Gitignore {
+func NewGitignore(options Options) (Gitignore, error) {
 	p := new(Gitignore)
 	p.opt = options
-	p.config = NewConfig()
-	return *p
+	config, err := NewConfig()
+	if err != nil {
+		return Gitignore{}, err
+	}
+	p.config = config
+	return *p, nil
 }
 
 // ---------------------------------------------------------------------
