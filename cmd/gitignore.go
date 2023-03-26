@@ -54,7 +54,7 @@ options:
 	app, err := gi.NewGitignore(*opt)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "gitignore: %s\n", err.Error())
-		
+
 	}
 	err = app.Run()
 	if err != nil {
