@@ -40,14 +40,14 @@ go install cmd/gitignore.go
 
 ## Configuration
 
-The application usage a configurable `.yaml` file for file types
-(and the preferred text editor for the generated `.gitignore`).
+The application uses a configurable `.yaml` file for file types
+and the preferred text editor for the generated `.gitignore`.
 There is a sample included with the application, but the user
-can specify their own by creating a file named `gitignore.yaml`
+can specify their own by creating a file named `config.yaml`
 in a `gitignore` subdirectory of their configuration directory,
-which is:
-- `$HOME/.config/gitignore` on Unix
-- `C:\Users\YourUser\AppData\Roaming\gitignore` on Windows
+e.g.,
+- `$HOME/.config/gitignore/config.yaml` on Unix
+- `C:\Users\YourUser\AppData\Roaming\gitignore\config.yaml` on Windows
 
 The configuration file must include entries for `editor` and `filetypes`.
 The `filetypes` entry contains one or more file type names (such as
