@@ -5,11 +5,14 @@ The format is based on [Keep a Changelog].
 	
 ## [Unreleased]
 
+## [v1.2.0] - 2023-03-26
+- Changed the location and name of the configuration file (see `README.md`)
+
 ## [v1.1.1] - 2023-02-27
 
 ### Fixed
 - issue #5 - Invalid local user configuration .yaml is not being checked
-
+ 
 ## [v1.1.0] - 2023-02-24
 
 ### Added
@@ -24,7 +27,8 @@ The format is based on [Keep a Changelog].
 
 [Semantic Versioning]: http://semver.org
 [Keep a Changelog]: http://keepachangelog.com
-[Unreleased]: https://github.com/philhanna/gitignore/compare/v1.1.1..HEAD
+[Unreleased]: https://github.com/philhanna/gitignore/compare/v1.2.0..HEAD
+[v1.2.0]: https://github.com/philhanna/gitignore/compare/v1.1.1..v1.2.0
 [v1.1.1]: https://github.com/philhanna/gitignore/compare/v1.1.0..v1.1.1
 [v1.1.0]: https://github.com/philhanna/gitignore/compare/v1.0.0..v1.1.0
 [v1.0.0]: https://github.com/philhanna/gitignore/compare/91591ad..v1.0.0
