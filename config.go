@@ -36,7 +36,7 @@ func NewConfig() (Config, error) {
 		var errmsg string
 		switch isLocal {
 		case true:
-			errmsg = fmt.Sprintf("Invalid yaml in local .gitignore.yaml: %s", err)
+			errmsg = fmt.Sprintf("Invalid yaml in local config.yaml: %s", err)
 		case false:
 			errmsg = fmt.Sprintf("Invalid yaml in built-in sample_config.yaml: %s", err)
 		}
@@ -59,7 +59,7 @@ func exists(filename string) bool {
 }
 
 // GetConfigData loads the configuration yaml data, either from the
-// user's ~/.gitignore.yaml file or the default configuration. The
+// user's config.yaml file or the default configuration. The
 // boolean return value is true if the configuration is local, false if
 // it came from the sample configuration.
 func GetConfigData() ([]byte, bool) {
@@ -67,8 +67,8 @@ func GetConfigData() ([]byte, bool) {
 
 	// See if the user has a local configuration file. If not, use the
 	// sample one.
-	home, _ := os.UserHomeDir()
-	configFile := filepath.Join(home, ".gitignore.yaml")
+	cfgdir, _ := os.UserConfigDir()
+	configFile := filepath.Join(cfgdir, "config.yaml")
 
 	var isLocal bool
 	switch {

@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog].
 - Added this change log
 
 ### Changed
-- Replaced `--quiet` option with `--verbose`
+- Made `--quiet` the default. Replaced `--quiet` option with `--verbose`
 
 ## [v1.0.0] - 2023-02-24
 - Preliminary Go version
