@@ -22,7 +22,3 @@ filetypes:
     - build/
     - dist/
     - "*.egg-info/"
-  ly:
-    - "*.swp"
-    - "*.mid"
-    - "*.ogg"
