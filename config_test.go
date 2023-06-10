@@ -2,16 +2,19 @@ package gitignore
 
 import (
 	_ "embed"
+	"os"
+	"path/filepath"
 	"testing"
 
+	"github.com/ghodss/yaml"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_exists(t *testing.T) {
 	tests := []struct {
-		name string
+		name     string
 		filename string
-		want bool
+		want     bool
 	}{
 		{"Directory", "testdata", true},
 		{"Empty file", "testdata/empty", true},
@@ -25,4 +28,18 @@ func Test_exists(t *testing.T) {
 			assert.Equal(t, want, have)
 		})
 	}
+}
+
+func TestGetConfigData(t *testing.T) {
+	data, isLocal := GetConfigData()
+	cfgdir, _ := os.UserConfigDir()
+	configFile := filepath.Join(cfgdir, "gitignore", "config.yaml")
+	if exists (configFile) {
+		assert.True(t, isLocal)
+	} else {
+		assert.False(t, isLocal)
+	}
+	var o any
+	err := yaml.Unmarshal(data, &o)
+	assert.Nil(t, err)
 }
