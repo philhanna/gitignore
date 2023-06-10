@@ -11,7 +11,7 @@ import (
 )
 
 //go:embed config.yaml
-var CONFIGDATA string
+var SAMPLE_CONFIG string
 
 // ---------------------------------------------------------------------
 // Type definitions
@@ -38,7 +38,7 @@ func NewConfig() (Config, error) {
 		case true:
 			errmsg = fmt.Sprintf("Invalid yaml in local config.yaml: %s", err)
 		case false:
-			errmsg = fmt.Sprintf("Invalid yaml in built-in sample_config.yaml: %s", err)
+			errmsg = fmt.Sprintf("Invalid yaml in sample config.yaml: %s", err)
 		}
 		return Config{}, errors.New(errmsg)
 	}
@@ -78,7 +78,7 @@ func GetConfigData() ([]byte, bool) {
 		data, _ = os.ReadFile(configFile)
 	default:
 		isLocal = false
-		data = []byte(CONFIGDATA)
+		data = []byte(SAMPLE_CONFIG)
 	}
 
 	return data, isLocal
