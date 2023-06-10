@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"sigs.k8s.io/yaml"
+	"github.com/ghodss/yaml"
 )
 
 //go:embed config.yaml
