@@ -67,8 +67,9 @@ func GetConfigData() ([]byte, bool) {
 
 	// See if the user has a local configuration file. If not, use the
 	// sample one.
+
 	cfgdir, _ := os.UserConfigDir()
-	configFile := filepath.Join(cfgdir, "config.yaml")
+	configFile := filepath.Join(cfgdir, "gitignore", "config.yaml")
 
 	var isLocal bool
 	switch {
