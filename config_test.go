@@ -43,3 +43,10 @@ func TestGetConfigData(t *testing.T) {
 	err := yaml.Unmarshal(data, &o)
 	assert.Nil(t, err)
 }
+
+func TestNewConfig(t *testing.T) {
+	p, err := NewConfig()
+	assert.Nil(t, err)
+	assert.NotEqual(t, "", p.Editor)
+	assert.NotZero(t, len(p.FileTypes))
+}
