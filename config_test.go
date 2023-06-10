@@ -34,7 +34,7 @@ func TestGetConfigData(t *testing.T) {
 	data, isLocal := GetConfigData()
 	cfgdir, _ := os.UserConfigDir()
 	configFile := filepath.Join(cfgdir, "gitignore", "config.yaml")
-	if exists (configFile) {
+	if exists(configFile) {
 		assert.True(t, isLocal)
 	} else {
 		assert.False(t, isLocal)
