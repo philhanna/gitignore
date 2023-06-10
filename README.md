@@ -10,7 +10,7 @@ the project.
 
 ## Usage
 ```
-usage: gitignore [-h] [-l] [-r] [-q] [-e] [type]
+usage: gitignore [-h] [-l] [-r] [-q] [-e] [filetype]
 
 Creates a basic .gitignore file in the current directory
 
@@ -60,24 +60,24 @@ Here is a sample:
 editor: vim
 filetypes:
   java:
-  - "*.swp"
-  - build/
-  - doc/
-  - "*.class"
-  - .classpath
-  - .project
+    - "*.swp"
+    - build/
+    - doc/
+    - "*.class"
+    - .classpath
+    - .project
   go:
-  - "*.swp"
+    - "*.swp"
   py:
-  - "*.swp"
-  - "*.pyc"
-  - "*.pyo"
-  - __pycache__
-  - .idea/
-  - venv/
-  - build/
-  - dist/
-  - "*.egg-info/"
+    - "*.swp"
+    - "*.pyc"
+    - "*.pyo"
+    - __pycache__
+    - .idea/
+    - venv/
+    - build/
+    - dist/
+    - "*.egg-info/"
 
 ```
 
