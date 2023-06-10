@@ -2,9 +2,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
-	"os"
 
 	gi "github.com/philhanna/gitignore"
 )
@@ -12,26 +10,6 @@ import (
 // Mainline
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-
-	usage := `usage: gitignore [OPTIONS] [type]
-
-Creates a basic .gitignore file in the current directory
-
-positional arguments:
-  filetype       Type of files (e.g. go, java, py)
-
-options:
-  -h, --help     Show this help message and exits
-  -t, --types    Lists supported file types
-  -l, --list     Lists the current .gitignore
-  -r, --replace  Replaces the current .gitignore, if it exists
-  -v, --verbose  Provides more details
-  -e, --edit     Edit the file when done
-`
-	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "%s\n", usage)
-		return
-	}
 
 	opt := new(gi.Options)
 
