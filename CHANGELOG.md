@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog].
 	
 ## [Unreleased]
 
+## [v1.3.0] - 2023-06-10
+- Added the `--types` option to list file types
+- Fixed problem of finding configuration YAML file
+- Switched to a different version of YAML
+  
 ## [v1.2.0] - 2023-03-26
 - Changed the location and name of the configuration file (see `README.md`)
 
@@ -27,7 +32,8 @@ The format is based on [Keep a Changelog].
 
 [Semantic Versioning]: http://semver.org
 [Keep a Changelog]: http://keepachangelog.com
-[Unreleased]: https://github.com/philhanna/gitignore/compare/v1.2.0..HEAD
+[Unreleased]: https://github.com/philhanna/gitignore/compare/v1.3.0..HEAD
+[v1.3.0]: https://github.com/philhanna/gitignore/compare/v1.2.0..v1.3.0
 [v1.2.0]: https://github.com/philhanna/gitignore/compare/v1.1.1..v1.2.0
 [v1.1.1]: https://github.com/philhanna/gitignore/compare/v1.1.0..v1.1.1
 [v1.1.0]: https://github.com/philhanna/gitignore/compare/v1.0.0..v1.1.0
