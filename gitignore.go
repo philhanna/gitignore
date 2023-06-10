@@ -2,8 +2,11 @@ package gitignore
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
+	"sort"
+	"strings"
 )
 
 const FILENAME = ".gitignore"
@@ -11,15 +14,6 @@ const FILENAME = ".gitignore"
 // ---------------------------------------------------------------------
 // Type definitions
 // ---------------------------------------------------------------------
-
-// Options holds the command line options
-type Options struct {
-	List     bool
-	Replace  bool
-	Edit     bool
-	Verbose  bool
-	Filetype string
-}
 
 // Gitignore holds the application data
 type Gitignore struct {
@@ -49,6 +43,12 @@ func NewGitignore(options Options) (Gitignore, error) {
 
 // Run runs the application
 func (self Gitignore) Run() error {
+
+	// List the supported types if requested
+	if self.opt.ListTypes {
+		self.ListTypes()
+		return nil
+	}
 
 	// List the file if requested.
 	if self.opt.List {
@@ -134,7 +134,7 @@ func (self Gitignore) EditFile() {
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "gitignore: %v\n", err)
+		log.Fatal(err)
 	}
 }
 
@@ -142,6 +142,32 @@ func (self Gitignore) EditFile() {
 func (self Gitignore) ListFile() {
 	data, _ := os.ReadFile(".gitignore")
 	fmt.Println(string(data))
+}
+
+// ListTypes prints the list of supported file types in alphabetical
+// order
+func (self Gitignore) ListTypes() {
+
+	ftMap := self.config.FileTypes
+
+	// Sort the list
+	keys := make([]string, 0)
+	for key := range ftMap {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+
+	// Print the list
+	widest := 0
+	for _, key := range keys {
+		if len(key) > widest {
+			widest = len(key)
+		}
+	}
+	for _, key := range keys {
+		padded := padString(key, widest)
+		fmt.Printf("%s (%d entries)\n", padded, len(ftMap[key]))
+	}
 }
 
 // ---------------------------------------------------------------------
@@ -154,4 +180,13 @@ func GetDefaults() []string {
 		"*.swp",
 	}
 	return defaults
+}
+
+// padString appends spaces to the right of a string
+func padString(s string, length int) string {
+	padding := length - len(s)
+	if padding <= 0 {
+		return s // No padding needed
+	}
+	return s + strings.Repeat(" ", padding)
 }

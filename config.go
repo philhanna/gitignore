@@ -1,7 +1,7 @@
 package gitignore
 
 import (
-	"embed"
+	_ "embed"
 	"errors"
 	"fmt"
 	"os"
@@ -10,8 +10,8 @@ import (
 	"sigs.k8s.io/yaml"
 )
 
-//go:embed sample_config.yaml
-var embeddedFS embed.FS
+//go:embed config.yaml
+var CONFIGDATA string
 
 // ---------------------------------------------------------------------
 // Type definitions
@@ -78,7 +78,7 @@ func GetConfigData() ([]byte, bool) {
 		data, _ = os.ReadFile(configFile)
 	default:
 		isLocal = false
-		data, _ = embeddedFS.ReadFile("sample_config.yaml")
+		data = []byte(CONFIGDATA)
 	}
 
 	return data, isLocal
