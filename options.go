@@ -22,7 +22,7 @@ type Options struct {
 
 func init() {
 
-	const usage = `usage: gitignore [OPTIONS] [type]
+	const usage = `usage: gitignore [OPTIONS] [filetype]
 
 Creates a basic .gitignore file in the current directory
 
