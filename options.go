@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 // ---------------------------------------------------------------------
@@ -36,9 +37,16 @@ options:
   -r, --replace  Replaces the current .gitignore, if it exists
   -v, --verbose  Provides more details
   -e, --edit     Edit the file when done
+
+Rules are configured in %s
 `
+	const PACKAGE_NAME = "gitignore"
+	const CONFIG_FILE = "config.yaml"
+	configDir, _ := os.UserConfigDir()
+	fullName := filepath.Join(configDir, PACKAGE_NAME, CONFIG_FILE)
+	fullUsage := fmt.Sprintf(usage, fullName)
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "%s\n", usage)
+		fmt.Fprintln(os.Stderr, fullUsage)
 		return
 	}
 }

@@ -23,6 +23,8 @@ options:
   -r, --replace  Replaces the current .gitignore, if it exists
   -v, --verbose  Provides more details
   -e, --edit     Edit the file when done
+
+Rules are configured in <filename>
 ```
 
 ## Installation
