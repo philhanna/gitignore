@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog].
 	
 ## [Unreleased]
 
+## [v2.0.0] - 2026-03-23
+- Converted project from Go to Python
+- Replaced `go.mod` with `pyproject.toml`
+- Replaced `flag` package with `argparse`
+- Replaced `github.com/ghodss/yaml` with `PyYAML`
+- Replaced manual config-directory detection with `platformdirs`
+- Bundled default `config.yaml` into package via `importlib.resources`
+- Replaced Go tests (testify) with pytest
+- Removed pre-built binaries; install via `pip` or `pipx`
+
 ## [v1.3.0] - 2023-06-10
 - Added the `--types` option to list file types
 - Fixed problem of finding configuration YAML file
@@ -32,7 +42,8 @@ The format is based on [Keep a Changelog].
 
 [Semantic Versioning]: http://semver.org
 [Keep a Changelog]: http://keepachangelog.com
-[Unreleased]: https://github.com/philhanna/gitignore/compare/v1.3.0..HEAD
+[Unreleased]: https://github.com/philhanna/gitignore/compare/v2.0.0..HEAD
+[v2.0.0]: https://github.com/philhanna/gitignore/compare/v1.3.0..v2.0.0
 [v1.3.0]: https://github.com/philhanna/gitignore/compare/v1.2.0..v1.3.0
 [v1.2.0]: https://github.com/philhanna/gitignore/compare/v1.1.1..v1.2.0
 [v1.1.1]: https://github.com/philhanna/gitignore/compare/v1.1.0..v1.1.1
