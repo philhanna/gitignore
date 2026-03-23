@@ -1,6 +1,4 @@
 # gitignore
-[![Go Report Card](https://goreportcard.com/badge/github.com/philhanna/gitignore)][idGoReportCard]
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/philhanna/gitignore)][idPkgGoDev]
 
 ## Overview
 
@@ -10,7 +8,7 @@ the project.
 
 ## Usage
 ```
-usage: gitignore [-h] [-l] [-r] [-q] [-e] [filetype]
+usage: gitignore [-h] [-t] [-l] [-r] [-v] [-e] [filetype]
 
 Creates a basic .gitignore file in the current directory
 
@@ -18,34 +16,34 @@ positional arguments:
   filetype       Type of files (e.g. go, java, py)
 
 options:
-  -h, --help     Show this help message and exits
-  -l, --list     Lists the current .gitignore
-  -r, --replace  Replaces the current .gitignore, if it exists
+  -h, --help     Show this help message and exit
+  -t, --types    List supported file types
+  -l, --list     List the current .gitignore
+  -r, --replace  Replace the current .gitignore, if it exists
   -v, --verbose  Provides more details
   -e, --edit     Edit the file when done
 
-Rules are configured in <filename>
+Rules are configured in config.yaml
 ```
 
 ## Installation
 
-### Binary executables
-There are pre-built binary executables for Linux, Windows, and MacOS in
-the `bin` directory.  Copy the appropriate one for your operating system
-to a directory in your path, and rename it as desired.
-
-### From source
-If you have Go installed, you can install the application with this:
 ```
-go install cmd/gitignore.go
+pipx install .
+```
+
+Or, into the current environment:
+
+```
+pip install .
 ```
 
 ## Configuration
 
 The application uses a configurable `.yaml` file for file types
 and the preferred text editor for the generated `.gitignore`.
-There is a sample included with the application, but the user
-can specify their own by creating a file named `config.yaml`
+There is a default config bundled with the application, but the user
+can override it by creating a file named `config.yaml`
 in a `gitignore` subdirectory of their configuration directory,
 e.g.,
 - `$HOME/.config/gitignore/config.yaml` on Unix
@@ -58,7 +56,7 @@ of lines to be used in the generated `.gitignore` file.
 
 Here is a sample:
 
-```
+```yaml
 editor: vim
 filetypes:
   java:
@@ -80,7 +78,6 @@ filetypes:
     - build/
     - dist/
     - "*.egg-info/"
-
 ```
 
 ## References
@@ -88,6 +85,3 @@ filetypes:
 - [.gitignore documentation](https://git-scm.com/docs/gitignore)
 - [Wikipedia article on YAML](https://en.wikipedia.org/wiki/YAML)
 - [YAML 1.2.0 specification](https://yaml.org/spec/1.2.0/)
-
-[idGoReportCard]: https://goreportcard.com/report/github.com/philhanna/gitignore
-[idPkgGoDev]: https://pkg.go.dev/github.com/philhanna/gitignore
