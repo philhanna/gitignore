@@ -1,4 +1,3 @@
-# gitignore.cli
 import argparse
 from dataclasses import dataclass
 

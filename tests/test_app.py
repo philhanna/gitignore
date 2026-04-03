@@ -1,4 +1,3 @@
-# tests.test_app
 import pytest
 
 from gitignore.app import DEFAULT_PATTERNS, GITIGNORE_FILE, Gitignore

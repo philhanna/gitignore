@@ -1,4 +1,3 @@
-# tests.conftest
 import pytest
 from gitignore.config import Config
 

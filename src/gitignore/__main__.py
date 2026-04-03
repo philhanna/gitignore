@@ -1,4 +1,3 @@
-# gitignore.__main__
 from .app import Gitignore
 from .cli import parse_args
 from .config import load_config
