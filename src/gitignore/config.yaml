@@ -1,7 +1,6 @@
 editor: vim
 filetypes:
   java:
-    - "*.swp"
     - build/
     - doc/
     - "*.class"
@@ -9,10 +8,8 @@ filetypes:
     - .project
     - ".vscode/"
   go:
-    - "*.swp"
     - ".vscode/"
   py:
-    - "*.swp"
     - "*.pyc"
     - "*.pyo"
     - ".vscode/"

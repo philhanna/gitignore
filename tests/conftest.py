@@ -7,8 +7,8 @@ def sample_config():
     return Config(
         editor="vim",
         file_types={
-            "go": ["*.swp", ".vscode/"],
-            "py": ["*.swp", "*.pyc", "__pycache__", "venv/"],
-            "java": ["*.swp", "build/", "*.class"],
+            "go": [".vscode/"],
+            "py": ["*.pyc", "__pycache__", "venv/"],
+            "java": ["build/", "*.class"],
         },
     )
