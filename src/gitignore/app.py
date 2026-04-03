@@ -6,7 +6,6 @@ from .cli import Options
 from .config import Config
 
 GITIGNORE_FILE = ".gitignore"
-DEFAULT_PATTERNS = ["*.swp"]
 
 
 class Gitignore:
@@ -50,9 +49,8 @@ class Gitignore:
     def create(self) -> None:
         """Write a new .gitignore file in the current directory.
 
-        Starts with :data:`DEFAULT_PATTERNS` (editor-level patterns such as
-        ``*.swp``) and appends any filetype-specific patterns from the config
-        when a filetype was specified on the command line.
+        Writes filetype-specific patterns from the config when a filetype was
+        specified on the command line.
 
         Exits with status 1 if the file already exists and ``--replace`` was
         not given.
@@ -61,7 +59,7 @@ class Gitignore:
         if path.exists() and not self.options.replace:
             print(f"{GITIGNORE_FILE} already exists; use -r to replace", file=sys.stderr)
             sys.exit(1)
-        lines = list(DEFAULT_PATTERNS)
+        lines = []
         if self.options.filetype:
             lines.extend(self.config.file_types.get(self.options.filetype, []))
         path.write_text("\n".join(lines) + "\n")
