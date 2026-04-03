@@ -4,6 +4,18 @@ from dataclasses import dataclass
 
 @dataclass
 class Options:
+    """Parsed command-line options controlling application behaviour.
+
+    Attributes:
+        list_types: Print available filetype names and exit instead of creating a file.
+        list_file: Print the contents of the existing .gitignore file.
+        replace: Overwrite an existing .gitignore rather than refusing.
+        edit: Open the .gitignore in the configured editor after writing it.
+        verbose: Print the resulting .gitignore contents after creation.
+        filetype: Optional filetype key (e.g. ``"py"``, ``"go"``) whose patterns
+            are appended to the generated file.  ``None`` when not supplied.
+    """
+
     list_types: bool
     list_file: bool
     replace: bool
@@ -13,6 +25,15 @@ class Options:
 
 
 def parse_args(argv=None) -> Options:
+    """Parse command-line arguments and return a populated :class:`Options` instance.
+
+    Args:
+        argv: Argument list to parse.  Defaults to ``sys.argv[1:]`` when
+            ``None``, which is the standard ``argparse`` behaviour.
+
+    Returns:
+        An :class:`Options` dataclass populated from the parsed arguments.
+    """
     parser = argparse.ArgumentParser(
         prog="gitignore",
         description="Creates a basic .gitignore file in the current directory",
