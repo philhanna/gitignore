@@ -60,20 +60,21 @@ Here is a sample:
 editor: vim
 filetypes:
   java:
-    - "*.swp"
     - build/
     - doc/
     - "*.class"
     - .classpath
     - .project
+    - ".vscode/"
   go:
-    - "*.swp"
+    - ".vscode/"
   py:
-    - "*.swp"
     - "*.pyc"
     - "*.pyo"
+    - ".vscode/"
     - __pycache__
     - .idea/
+    - .venv/
     - venv/
     - build/
     - dist/
