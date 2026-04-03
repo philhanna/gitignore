@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog].
 	
 ## [Unreleased]
 
+## [2.0.1] - 2026-04-02
+- Removed hardcoded default patterns; all patterns now configured in `config.yaml`
+- Added `.venv/` and `.vscode/` entries to bundled `config.yaml`
+- Added comprehensive docstrings to all modules, classes, and functions
+- Updated README sample config and bumped version in `pyproject.toml`
+
 ## [v2.0.0] - 2026-03-23
 - Converted project from Go to Python
 - Replaced `go.mod` with `pyproject.toml`
