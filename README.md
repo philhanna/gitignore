@@ -28,13 +28,40 @@ Rules are configured in config.yaml
 
 ## Installation
 
-```
-pipx install .
+### From source (development install)
+
+Clone the repository and install in editable mode so that changes to the
+source are reflected immediately without reinstalling:
+
+```bash
+git clone https://github.com/philhanna/gitignore.git
+cd gitignore
+python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
+pip install -e .
 ```
 
-Or, into the current environment:
+The `gitignore` command will now be available inside the virtual environment.
 
+### System-wide with pipx (recommended for end users)
+
+[pipx](https://pipx.pypa.io) installs the tool in an isolated environment and
+exposes the `gitignore` command globally — no virtual environment management
+required:
+
+```bash
+pipx install git+https://github.com/philhanna/gitignore.git
 ```
+
+Or, if you already have a local clone:
+
+```bash
+pipx install /path/to/gitignore
+```
+
+### Into the current environment
+
+```bash
 pip install .
 ```
 
