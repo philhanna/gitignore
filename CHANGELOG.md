@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog].
 	
 ## [Unreleased]
 
+## [v2.1.0] - 2026-04-11
+- Added comprehensive docstrings to all classes, methods, and functions in `src/`
+- Added inline comments for non-obvious logic throughout `src/`
+- Expanded README installation instructions with clone, venv, and `pip install -e .` steps
+
 ## [v2.0.0] - 2026-03-23
 - Converted project from Go to Python
 - Replaced `go.mod` with `pyproject.toml`
@@ -42,7 +47,8 @@ The format is based on [Keep a Changelog].
 
 [Semantic Versioning]: http://semver.org
 [Keep a Changelog]: http://keepachangelog.com
-[Unreleased]: https://github.com/philhanna/gitignore/compare/v2.0.0..HEAD
+[Unreleased]: https://github.com/philhanna/gitignore/compare/v2.1.0..HEAD
+[v2.1.0]: https://github.com/philhanna/gitignore/compare/v2.0.0..v2.1.0
 [v2.0.0]: https://github.com/philhanna/gitignore/compare/v1.3.0..v2.0.0
 [v1.3.0]: https://github.com/philhanna/gitignore/compare/v1.2.0..v1.3.0
 [v1.2.0]: https://github.com/philhanna/gitignore/compare/v1.1.1..v1.2.0
