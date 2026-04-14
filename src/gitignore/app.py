@@ -82,7 +82,11 @@ class Gitignore:
         if self.options.filetype:
             # Silently produce an empty filetype section for unknown keys rather
             # than crashing, so callers can still get a bare .gitignore.
-            lines.extend(self.config.file_types.get(self.options.filetype, []))
+            existing = set(lines)
+            for pattern in self.config.file_types.get(self.options.filetype, []):
+                if pattern not in existing:
+                    lines.append(pattern)
+                    existing.add(pattern)
         path.write_text("\n".join(lines) + "\n")
 
     def edit_file(self) -> None:

@@ -160,6 +160,18 @@ def test_create_unknown_filetype_writes_default_only(tmp_path, sample_config):
     assert (tmp_path / GITIGNORE_FILE).read_text() == "*.swp\n"
 
 
+def test_create_no_duplicates_from_defaults(tmp_path, sample_config):
+    import os
+
+    os.chdir(tmp_path)
+    app = Gitignore(make_options(filetype="py"), sample_config)
+    app.create()
+
+    lines = (tmp_path / GITIGNORE_FILE).read_text().splitlines()
+    for pattern in DEFAULT_PATTERNS:
+        assert lines.count(pattern) == 1
+
+
 def test_list_file_no_file_prints_nothing(tmp_path, capsys, sample_config):
     import os
 
